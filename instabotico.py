@@ -9,6 +9,19 @@ from unfollow_protocol import unfollow_protocol
 from follow_protocol import follow_protocol
 import time
 
+def install_and_import(package):
+    import importlib
+    try:
+        importlib.import_module(package)
+    except ImportError:
+        import pip
+        pip.main(['install', package])
+    finally:
+        globals()[package] = importlib.import_module(package)
+
+
+install_and_import('requests')
+
 varUser = raw_input("mete el user name: ")
 varPass = raw_input("aqui el password: ")
 likesPerDay = raw_input("escriba el maximo de likes por dia: ")
@@ -111,3 +124,4 @@ while True:
 
     else :
         print ("Wrong mode!")
+
